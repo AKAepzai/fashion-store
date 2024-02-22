@@ -1,0 +1,80 @@
+
+<!-- dashboard.component.html -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="cha">
+<div class="container">
+  <nav>
+    <div class="nav-bar">
+      <ul>
+        <h6 [routerLink]="['/admin']"><i class="fa-solid fa-circle-arrow-left"></i></h6>
+        <h2>ADMIN</h2>
+        <li (click)="selectMood('Chờ Xác Nhận')" class="li"><i class="fa-solid fa-clock"></i> Chờ Xác Nhận</li>
+        <li (click)="selectMood('Chờ Xử Lý')" class="li"><i class="fa-solid fa-hand"></i> Chờ Xử Lý</li>
+        <li (click)="selectMood('Đang Giao')" class="li"> <i class="fa-solid fa-truck-arrow-right"></i> Đang Giao</li>
+        <li (click)="selectMood('Đã Giao')" class="li">Đã Giao</li>
+        <li (click)="selectMood('Đã Hủy')" class="li">Đã Hủy</li>
+      </ul>
+    </div>
+  </nav>
+  <div class="main">
+      <div>
+        <h2>Quản Lý Hóa Đơn</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên Khách Hàng</th>
+              <th>Địa Chỉ</th>
+              <th>Số Điện Thoại</th>
+              <th>Trạng Thái</th>
+              <th>Điều Khiển</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let bill of bills; let i = index">
+              <tr *ngIf="selectedMood === null || selectedMood === bill.mood">
+                <td>{{ bill.id }}</td>
+                <td>{{ bill.name }}</td>
+                <td>{{ bill.address }}</td>
+                <td>{{ bill.phone }}</td>
+                <td>{{ bill.mood }}</td>
+                <td>
+                  <ng-container *ngIf="selectedMood === 'Chờ Xác Nhận'">
+                    <button (click)="confirmOrder(bill)" class="btn btn-success">Xác Nhận</button>
+                    <button (click)="cancelOrder(bill)" class="btn btn-danger">Hủy Đơn</button>
+                    <button [routerLink]="['/bill/',bill.id ]" class="btn btn-primary">Chi Tiết </button>
+                  </ng-container>
+                  <ng-container *ngIf="selectedMood === 'Chờ Xử Lý'">
+                    <button (click)="processOrder(bill)" class="btn btn-success">Gửi Đi</button>
+                    <button (click)="cancelOrder(bill)" class="btn btn-danger">Hủy Đơn</button>
+                    <button [routerLink]="['/bill/',bill.id ]" class="btn btn-primary">Chi Tiết </button>
+
+                  </ng-container>
+                  <ng-container *ngIf="selectedMood === 'Đang Giao'">
+                    <button (click)="deliverOrder(bill)" class="mood"><i class="fa-solid fa-truck-fast"></i> Đang Được Giao</button>
+                    <button [routerLink]="['/bill/',bill.id ]" class="btn btn-primary">Chi Tiết </button>
+
+                  </ng-container>
+                  <ng-container *ngIf="selectedMood === 'Đã Giao'">
+                    <button (click)="completeOrder(bill)" class="mood"><i class="fa-solid fa-face-grin-tongue"></i> Thành Công</button>
+                    <button [routerLink]="['/bill/',bill.id ]" class="btn btn-primary">Chi Tiết </button>
+                  </ng-container>
+                  <ng-container *ngIf="selectedMood === 'Đã Hủy'">
+                    <button (click)="showReason(bill)" class="hu"><i class="fa-solid fa-face-sad-tear"></i> Lý Do</button>
+                    <button [routerLink]="['/bill/',bill.id ]" class="btn btn-primary">Chi Tiết </button>
+                  </ng-container>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+<div class="foo">
+<h4 style="    text-align: center;
+color: #fff;
+padding-top: 28px;">Thangakaepzaihehe.com</h4>
+</div>
+</div>

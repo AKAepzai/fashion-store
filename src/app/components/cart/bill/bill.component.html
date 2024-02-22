@@ -1,0 +1,55 @@
+<div class="body">
+  <div class="content">
+
+    <div class="bill" *ngFor="let bill of bill">
+      <div class="logo" style="text-align: center;">
+        <a [routerLink]="['/products',]"><img src="https://pbs.twimg.com/profile_images/795752054455091200/c4p0GLo0_400x400.jpg" alt=""></a>
+      </div>
+
+      <h1>Hóa Đơn CỦA BẠN</h1>
+      <div class="bill-detai">
+        <p><b>Cảm Ơn</b> <span id="customer-name">{{bill.username}}</span></p>
+        <span>Đơn Hàng của <b>{{bill.username}}</b> đã giúp chúng tôi</span>
+        <hr>
+        <div class="if">
+          <p> <b>Email</b> <br><span id="customer-email">{{bill.email}}</span></p>
+          <p><b>Địa chỉ</b> <br><span id="customer-address">{{bill.address}}</span></p>
+          <p><b>Số điện thoại</b><br><span id="customer-phone">{{bill.phone}}</span></p>
+        </div>
+        <hr>
+
+      </div>
+      <div class="items">
+        <h2>Sản phẩm của bạn:</h2>
+        <div id="bill-items">
+          <div class="top" *ngFor="let item of bill.item">
+            <div style="display: flex;">
+              <img src="{{item.imageUrl}}" width="90px" height="100px" alt="">
+              <div class="central">
+                <span>{{ item.name }}</span>
+                <p>x {{item.quantity}}</p>
+              </div>
+            </div>
+            <h4>{{item.price}}</h4>
+          </div>
+
+        </div>
+        <hr>
+        <div class="foo">
+          <p style="color: red; font-size: 30px;font-weight: 700; text-decoration: underline;"> {{bill.mood}}</p>
+          <p style="text-align: end;">Tổng tiền: <b style="color: red;">{{calculateTotal()}}</b><span
+              id="bill-total"></span></p>
+        </div>
+        <div class="footer" style="padding: 10px;">
+          <p></p>
+          <p>
+            Cảm ơn đã mua sắm với chúng tôi!</p>
+          <p>DVRK</p>
+          <P>Cần giúp đỡ? <a href="">hãy liên hệ chúng tôi</a></P>
+        </div>
+        <p style="text-align: end;">tháng 1 năm 2024</p>
+      </div>
+    </div>
+
+
+  </div>

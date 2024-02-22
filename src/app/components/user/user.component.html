@@ -1,0 +1,117 @@
+<div class="cha">
+  <div class="container">
+    <nav>
+      <div class="nav-bar">
+
+        <ul>
+          <h6 ><a [routerLink]="['/products']" style="color: #fff;"><i class="fa-solid fa-circle-arrow-left"></i></a></h6>
+          <h2>Quản Lý </h2>
+          <li>
+            <div class="user">
+              <div class="ic" style="font-size: 30px;">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+              <div class="name" *ngIf="user">
+                <span style="color: red; font-size: 20px; text-decoration: underline;">{{user.username}}</span>
+                <a (click)="showUserProfileSection()">
+                  <i class="fa-solid fa-pen"></i> Chỉnh Sửa
+                </a>
+
+              </div>
+            </div>
+          </li>
+          <li (click)="showUserOrdersSection()" class="i">
+            <a (click)="showHiddens()"><i class="fa-solid fa-bars"></i></a>  Đơn Hàng
+          </li>
+
+          <div class="hiddenMood" *ngIf="hiddenMood">
+          <li (click)="selectMood('Chờ Xác Nhận')" class="li"><i class="fa-solid fa-clock"></i> Chờ Xác Nhận</li>
+          <li (click)="selectMood('Chờ Xử Lý')" class="li"><i class="fa-solid fa-hand"></i> Chờ Xử Lý</li>
+          <li (click)="selectMood('Đang Giao')" class="li"> <i class="fa-solid fa-truck-arrow-right"></i> Đang Giao</li>
+          <li (click)="selectMood('Đã Giao')" class="li">Đã Giao</li>
+          <li (click)="selectMood('Đã Hủy')" class="li">Đã Hủy</li>
+        </div>
+          <li (click)="showUserProfileSection()" class="i">
+            <i class="fa-regular fa-user"></i> Tài Khoản
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="main">
+      <div class="tk">
+        
+      </div>
+      <div *ngIf="showUserOrders && showUserOrdersSection">
+        <div *ngFor="let bill of bills">
+          <div  *ngIf="selectedMood === null || selectedMood === bill.mood">
+
+          <hr>
+          <div class="head">
+            <h5>Trạng thái đơn hàng : <b style="color: rgb(249, 10, 10);">{{bill.mood}}</b></h5>
+          </div>
+          <div class="top" *ngFor="let item of bill.item">
+            <div style="display: flex;">
+              <img src="{{item.imageUrl}}" width="90px" height="100px" alt="">
+              <div class="central">
+                <span>{{ item.name }}</span>
+                <p>x {{item.quantity}}</p>
+              </div>
+            </div>
+            <h4>{{item.price * item.quantity}}</h4>
+
+          </div>
+          <div class="foo">
+            <div class="but" style="display: flex;">
+              <div class="vote">
+                <button [routerLink]="['/bill', bill.id]">Chi Tiết</button>
+              </div>
+              <button *ngIf="(showUserOrders && (bill.mood === 'Chờ Xác Nhận' || bill.mood === 'Chờ Xử Lý'))"
+                (click)="cancelOrder(bill)">Hủy Đơn</button>
+              <button *ngIf="(showUserOrders && (bill.mood === 'Đang Giao'))" (click)="completeOrder(bill)">ThànhCông</button>
+            </div>
+          </div>
+
+          <hr>
+        </div>
+        </div>
+      </div>
+      <div *ngIf="showUserProfile" class="profile" style="background-color: #fff;">
+        <div class="head">
+          <h1>Hồ Sơ Của Tôi</h1> <br>
+        </div>
+        <hr>
+        <div class="form">
+          <label for="username">Tên Đăng Nhập</label>
+          <input type="text" id="username" [(ngModel)]="user.username">
+          <label for="email">Địa Chỉ Email</label>
+          <input type="text" id="email" disabled [(ngModel)]="user.email">
+          <button (click)="saveChanges()">Lưu Thay Đổi</button>
+          hoặc
+          <a (click)="toggleChangePasswordForm()" class="a">Thay Đổi Mật Khẩu ?</a>
+
+          <div *ngIf="showChangePassword">
+            <form (ngSubmit)="changePassword()" #changePasswordForm="ngForm">
+              <div class="form-group">
+                <label for="oldPassword">Mật khẩu cũ:</label>
+                <input type="password" id="oldPassword" name="oldPassword" [(ngModel)]="oldPassword" required>
+              </div>
+              <div class="form-group">
+                <label for="newPassword">Mật khẩu mới:</label>
+                <input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword" required>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword"
+                  required>
+              </div>
+              <button type="submit" [disabled]="changePasswordForm.invalid">Đổi mật khẩu</button>
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

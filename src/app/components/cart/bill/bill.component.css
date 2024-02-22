@@ -1,0 +1,100 @@
+.body {
+  background-color: #ffe8d2;
+  font-family: 'Montserrat', sans-serif
+}
+
+.bill {
+  margin: 20px;
+  background: #fff;
+  padding: 3em;
+  width: 50%;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+.logo img {
+  width: 120px;
+  border-radius: 25px;
+  padding: 14px 0px;
+  margin-top: -3em;
+}
+
+.content {
+  width: 100%;
+  /* display: block; */
+  justify-content: center;
+  /* text-align: center; */
+  display: flex;
+}
+.foo{
+  display: flex;
+  justify-content: space-around;
+}
+h1 {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: blanchedalmond;
+}
+
+.if {
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.if p b {
+  font-weight: 300;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+.if span {
+  text-decoration: underline;
+  font-size: 13px;
+}
+.central{
+  margin: 0px 15px;
+}
+.central span{
+  margin-bottom: 20px;
+  display: grid;
+}
+#bill-items {
+  list-style: none;
+}
+
+#bill-items img {
+  width: 100px;
+}
+.top{
+  border-top: 1px solid#ccc;
+  padding: 15px;
+  display: flex;
+  margin: 20px;
+  width: 95%;
+  justify-content: space-between;
+}
+h5{
+  text-align: end;
+  margin:0 22px;
+}
+h3 {
+  font-size: 15px;
+  width: 70%;
+  font-weight: 400;
+}
+
+.product {
+  text-align: start;
+}
+h4{
+  font-size: 18px;
+}
+#customer-name{
+  font-size: 30px;
+  margin: 17px;
+  text-decoration: underline;
+}

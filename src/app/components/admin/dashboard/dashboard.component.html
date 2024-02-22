@@ -1,0 +1,183 @@
+<!-- dashboard.component.html -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="cha">
+<div class="container">
+  <nav>
+    <div class="nav-bar">
+      <ul>
+        <h6 [routerLink]="['/products']"><i class="fa-solid fa-circle-arrow-left"></i></h6>
+        <h2>ADMIN</h2>
+        <li (click)="showAll()">Trang Chủ</li>
+        <h2 (click)="showCates()">Danh Mục</h2>
+        <li (click)="showProducts()">Sản Phẩm</li>
+        <li (click)="showUsers()">Tài Khoản</li>
+        <li (click)="showBills()">Đơn Hàng</li>
+        <h2>Thống Kê</h2>
+        <li>Sản Phẩm </li>
+        <li [routerLink]="['/admin/demo']">Đơn Hàng</li>
+      </ul>
+    </div>
+  </nav>
+  <div class="main">
+    <div class="tk">
+      <div class="tk-border">
+        <h3>Tổng Sản Phẩm</h3>
+        <p>{{ getTotalProducts() }}</p>
+      </div>
+      <div class="tk-border">
+        <h3>Tổng Tài KHoản</h3>
+        <p>{{ getTotalCustomers() }}</p>
+      </div>
+      <div class="tk-border">
+        <h3>Tổng Đơn hàng</h3>
+        <p>{{ getTotalOrders() }}</p>
+      </div>
+
+    </div>
+    <div class="add-product-form" *ngIf="showAddForm">
+      <span (click)="hideForm()"><i class="fa-solid fa-circle-xmark"></i></span>
+      <h2>{{ editedProductId ? 'Chỉnh Sửa Sản Phẩm' : 'Thêm Sản Phẩm' }}</h2>
+      <form (ngSubmit)="saveProduct()">
+        <div class="add">
+        <label for="productName">Tên Sản Phẩm:</label>
+        <input type="text" id="productName" [(ngModel)]="newProduct.name" name="name" required>
+        <label for="productPrice">Giá:</label>
+        <input type="number" id="productPrice" [(ngModel)]="newProduct.price" name="price" required>
+
+        <label for="productQuantity">Số Lượng:</label>
+        <input type="number" id="productQuantity" [(ngModel)]="newProduct.quantity" name="quantity" required>
+
+        <label for="productDate">Ngày:</label>
+        <input type="date" id="productDate" [(ngModel)]="newProduct.date" name="date" required>
+
+        <label for="productCategory">Danh Mục:</label>
+        <select id="productCategory" [(ngModel)]="newProduct.categoryId" name="category" required>
+          <option value="defaul" selected>Danh Mục</option>
+          <option value="1">Nam</option>
+          <option value="2">Nữ</option>
+
+        </select>
+        <label for="productDescription">Mô Tả:</label>
+        <textarea id="productDescription" [(ngModel)]="newProduct.description" name="description" required></textarea>
+
+        <button type="submit" class="btn btn-primary">{{ editedProductId ? 'Lưu Sửa Đổi' : 'Lưu' }}</button>
+      </div>
+      </form>
+    </div>
+    <div class="table" *ngIf="showProduct">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Ảnh</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Số Lượng</th>
+            <th><button class="btn btn-success" (click)="showAddForm = true">Thêm Sản Phẩm</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td><img src="{{product.imageUrl}}" alt="" width="100px"></td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+            <td>
+              <button class="btn btn-primary" (click)="editProduct(product.id)">Edit</button>
+              <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- LOẠI SẢN PHẨM -->
+    <table class="table" *ngIf="showCate">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Tên</th>
+          <th>
+            <button class="btn btn-success" (click)="showAddCategory()">Thêm Loại</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of categories">
+          <td>{{ c.id }}</td>
+          <td>{{c.name}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editCategory(c.id)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteCate(c.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="edit-category-form" *ngIf="showEditCategoryForm">
+      <span (click)="hideForm()"><i class="fa-solid fa-circle-xmark"></i></span>
+      <h2>{{ editedCategoryId ? 'Chỉnh Sửa Loại' : 'Thêm Loại' }}</h2>
+      <form (ngSubmit)="saveCategory()">
+        <div class="edit">
+          <label for="categoryName">Tên Loại:</label>
+          <input type="text" id="categoryName" [(ngModel)]="editedCategory.name" name="name" required>
+
+          <!-- Các trường khác của loại nếu có -->
+
+          <button type="submit" class="btn btn-primary" style="margin: 10px 0;">{{ editedCategoryId ? 'Lưu Sửa Đổi' : 'Lưu' }}</button>
+        </div>
+      </form>
+    </div>
+    <!-- USER -->
+    <table class="table" *ngIf="showUser">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Tên</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td>{{u.id}}</td>
+          <td>{{u.username}}</td>
+          <td>{{u.email}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- ĐƠN HÀNG -->
+<table class="styled-table" *ngIf="showBill">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Tên</th>
+      <th>Email</th>
+      <th>Tên Sản Phẩm</th>
+      <th>Ảnh</th>
+      <th style="width: 119px;">Số lượng</th>
+      <th>Giá</th>
+      <th>Quản Lý</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let b of bills" style="border-bottom: 2px solid #ccc;">
+    <tr >
+      <td>{{ b.id }}</td>
+      <td>{{b.username}}</td>
+      <td>{{b.email}}</td>
+      <div class="item" *ngFor="let item of b.item">
+      <td>{{item.name}}</td>
+      <td><img src="{{item.imageUrl}}" alt="" width="100px"></td>
+      <td style="width: 68px;">{{item.quantity}}</td>
+      <td>{{item.price}}</td>
+    </div>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+<div class="foo">
+<h4 style="    text-align: center;
+color: #fff;
+padding-top: 28px;">Thangakaepzaihehe.com</h4>
+</div>
+</div>

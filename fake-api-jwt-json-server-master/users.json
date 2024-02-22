@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "username": "admin",
+      "email": "admin@email.com",
+      "special": 1,
+      "password": "admin"
+    },
+    {
+      "id": 1,
+      "username": "ak94",
+      "email": "hduc73424@gmail.com",
+      "password": "3"
+    },
+    {
+      "id": 2,
+      "username": "eiu",
+      "email": "tranxam2002@gmail.com",
+      "password": "1"
+    },
+    {
+      "id": 3,
+      "username": "thangep",
+      "email": "thang0866808370@gmail.com",
+      "password": "1"
+    }
+  ]
+}

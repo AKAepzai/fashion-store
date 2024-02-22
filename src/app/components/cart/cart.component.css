@@ -1,0 +1,99 @@
+body{
+  margin: 0px;
+  padding: 0px;
+}
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.left{
+  width: 10%;
+  text-align: end;
+}
+.central {
+  display: flex;
+  width: 33%;
+}
+.central input {
+  width: 100%;
+  height: 37px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: 2px solid #000;
+  border-right: none;
+}
+.central button {
+  width: 70px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 19px;
+  background-color: #000;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  border: 1px solid #000;
+}
+.central button:hover {
+  background: rgba(55, 57, 59, 0.993);
+  color: #fff;
+}
+.right {
+  display: flex;
+  width: 10%;
+  justify-content: space-evenly;
+  font-size: 25px;
+}
+h1{
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #0000000f;
+  font-size: 35px;
+}
+h1 a{
+  color: #000;
+}
+h2{
+  margin-top: 20px;
+  padding: 20px;
+}
+.table{
+  border-top: 1px solid #ccc;
+}
+.pay{
+  padding-top: 10px;
+  text-align: end;
+}
+.pay-top button{
+  background: #fff;
+  width:25% ;
+  height: 50px;
+  border: 1px solid #ccc;
+}
+.bot button {
+  width: 50%;
+  height: 45px;
+  background: #000;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+}
+.bot button :hover{
+  background-color: #000;
+  color: red;
+}
+.dau{
+  cursor: pointer;
+  border: none;
+  background: #fff;
+  font-size: 16px;
+}
+i:hover{
+  color: red;
+  font-size: 18px;
+}
+.del button{
+  background-color: #fff;
+  border: none;
+}

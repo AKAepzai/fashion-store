@@ -1,0 +1,67 @@
+<!-- register.component.html -->
+<section class="" style="background-color: #000;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img style="border-radius: 14px;" src="https://i.pinimg.com/236x/35/0d/91/350d91aebac144b7f916a92946633059.jpg"
+                alt="login form" width="115.4%" height="100%" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form #myForm="ngForm" (ngSubmit)="onRegister(myForm.value)">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <span class="h1 fw-bold mb-0">Đăng Ký</span>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="text" id="username" name="username" class="form-control form-control-lg" ngModel required #username="ngModel">
+                    <div style="color:red" *ngIf="username.invalid && (username.dirty || username.touched)">
+                      Vui lòng nhập tên đăng nhập
+                    </div>
+                    <label class="form-label" for="name">Tên Tài Khoản</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="email" id="email" class="form-control form-control-lg" required ngModel name="email">
+                    <label class="form-label" for="email">Email </label>
+                    <div style="color:red" *ngIf="myForm.controls['email'].invalid && (myForm.controls['email'].dirty || myForm.controls['email'].touched)">
+                      <div *ngIf="myForm.controls['email'].errors?.['required']">Vui lòng nhập email</div>
+                      <div *ngIf="myForm.controls['email'].errors?.['email']">Vui lòng nhập đúng định dạng email</div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="pass" class="form-control form-control-lg" required ngModel name="password">
+                    <label class="form-label" for="pass">Mật Khẩu</label>
+                    <div style="color:red" *ngIf="myForm.controls['password'].invalid && (myForm.controls['password'].dirty || myForm.controls['password'].touched)">
+                      Vui lòng nhập password
+                    </div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control form-control-lg" ngModel required #confirmPassword="ngModel">
+                    <label for="confirmPassword">Nhập lại mật khẩu:</label>
+                    <div style="color:red" *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                      Vui lòng xác nhận lại mật khẩu
+                    </div>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button type="submit" name="register" class="btn btn-dark btn-lg btn-block" [disabled]="myForm.invalid">Đăng ký</button>
+                  </div>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Bạn đã có tài khoản <a href="admin/login" style="color: #393f81;">Đăng Nhập</a></p>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
